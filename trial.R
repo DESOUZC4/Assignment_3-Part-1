@@ -23,3 +23,45 @@ a <- subset(x, Mean1<10)
 head(a)
 str(a)
 
+#Question 5: Make a histogram plot of the mean values in png format and paste it into your report.
+hist(x$Mean1)
+hist(x$Mean1, breaks = 20, border="red", col = "green")
+
+#Question 6: Import this csv file into an R object. What are the column names?
+download.file("https://raw.githubusercontent.com/markziemann/SLE712_files/master/bioinfo_asst3_part1_files/growth_data.csv", destfile = "growth_data.csv")
+y<- read.csv("growth_data.csv", header = TRUE)
+head(y)
+str(y)
+#The column names are Site, TreeID, Circumf_2004_cm, Circumf_2009_cm, Circumf_2014_cm and Circumf_2019_cm.
+
+#Question 7: Calculate the mean and standard deviation of tree circumference at the start and end of the study at both sites.
+mean(y$Circumf_2004_cm)
+subset(y, Site=="northeast")
+head(y)
+str(y)
+subset(y, Site=="southwest")
+head(y)
+str(y)
+ne <- subset(y, Site=="northeast")
+head(ne)
+str(ne)
+sw <- subset(y, Site=="southwest")
+head(sw)
+str(sw)
+mean(ne$Circumf_2004_cm)
+mean(sw$Circumf_2004_cm)
+mean(ne$Circumf_2019_cm)
+mean(sw$Circumf_2019_cm)
+sd(sw$Circumf_2019_cm)
+sd(ne$Circumf_2019_cm)
+sd(sw$Circumf_2004_cm)
+sd(ne$Circumf_2004_cm)
+head(ne)
+head(sw)
+
+# Question 8: Make a box plot of tree circumference at the start and end of the study at both sites.
+boxplot(ne$Circumf_2004_cm,ne$Circumf_2019_cm)
+boxplot(ne$Circumf_2004_cm,ne$Circumf_2019_cm,sw$Circumf_2004_cm,sw$Circumf_2019_cm,names= c("ne2004","ne2019","sw2004","sw2019"), ylab="Circumference (cm)", xlab="site and years", main="Growth at plantation site")
+
+
+
