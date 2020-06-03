@@ -4,22 +4,23 @@ download.file("https://raw.githubusercontent.com/markziemann/SLE712_files/master
 #Question 1:Read in the file, making the gene accession numbers the row names. Show a table of values for the first six genes. 
 x<- read.table("gene.expression.tsv")
 x <-read.table("gene.expression.tsv",header= TRUE, row.names = 1)
-x[1:7, ]
+
+x[1:7, ] # "x" is the object for first 6 genes
 head(x)
 str(x)
 
 #Question 2:Make a new column which is the mean of the other columns. Show a table of values for the first six genes. 
-x$Mean1 <- rowMeans(x)
+x$Mean1 <- rowMeans(x) # "Mean1" is the object representing the mean column.
 head(x)
 
 #Question 3:  List the 10 genes with the highest mean expression 
 order(-x$Mean1)
-x[order(-x$Mean1), ]
-x_sorted <- x[order(-x$Mean1), ]
+x[order(-x$Mean1), ] 
+x_sorted <- x[order(-x$Mean1), ] # "x_sorted" are the 10 genes with highest mean expression
 head(x_sorted,10)
 
 #Question 4:  Determine the number of genes with a mean <10 
-a <- subset(x, Mean1<10) 
+a <- subset(x, Mean1<10) # "a" is the object for the genes with mean <10
 head(a)
 str(a)
 
@@ -35,27 +36,32 @@ str(y)
 #The column names are Site, TreeID, Circumf_2004_cm, Circumf_2009_cm, Circumf_2014_cm and Circumf_2019_cm.
 
 #Question 7: Calculate the mean and standard deviation of tree circumference at the start and end of the study at both sites.
-mean(y$Circumf_2004_cm)
+   # the data for the sites "Northeast" and "Southwest" are seperated as the objects "ne" and "sw" respectively.
 subset(y, Site=="northeast")
 head(y)
 str(y)
 subset(y, Site=="southwest")
 head(y)
 str(y)
-ne <- subset(y, Site=="northeast")
+ne <- subset(y, Site=="northeast") # 
 head(ne)
 str(ne)
 sw <- subset(y, Site=="southwest")
 head(sw)
 str(sw)
-mean(ne$Circumf_2004_cm)
-mean(sw$Circumf_2004_cm)
-mean(ne$Circumf_2019_cm)
-mean(sw$Circumf_2019_cm)
-sd(sw$Circumf_2019_cm)
-sd(ne$Circumf_2019_cm)
-sd(sw$Circumf_2004_cm)
-sd(ne$Circumf_2004_cm)
+  # Mean of sites "ne" and "sw" are calculated 
+
+mean(ne$Circumf_2004_cm) #mean= 5.078
+mean(sw$Circumf_2004_cm) #mean= 5.076
+mean(ne$Circumf_2019_cm) #mean= 40.052
+mean(sw$Circumf_2019_cm) #mean= 59.772
+
+  # Standard deviation of sites "ne" and "sw" are calculated 
+
+sd(sw$Circumf_2019_cm) #sd= 22.57784
+sd(ne$Circumf_2019_cm) #sd= 16.90443
+sd(sw$Circumf_2004_cm) #sd= 1.060527
+sd(ne$Circumf_2004_cm) #sd= 1.059127
 head(ne)
 head(sw)
 
