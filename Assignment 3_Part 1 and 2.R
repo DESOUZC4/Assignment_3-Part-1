@@ -88,15 +88,93 @@ makeblastdb("Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa",dbtype
 
 #Question 2: Download the sample fasta sequences and read them in as above. For your allocated sequence,determine the length (in bp) and the proportion of GC bases.
 download.file("https://raw.githubusercontent.com/markziemann/SLE712_files/master/bioinfo_asst3_part2_files/sample.fa", destfile= "sample.fa")
-s <- read.fasta("sample.fa")
+s <- read.fasta("sample.fa") # "s" is the object for the sample fasta file.
 head(s)
 str(s)
 #Allocated sequence is "25"
-c <- s$`25`
-head(c)
-str(c)
-
+c <- s[[25]] # "c" is the object for our group sequence 25
+c
 seqinr::getLength(c)
 
 seqinr::GC(c)
 #length for sequence"25" is 1047 and proportion of GC bases is 0.5635148
+
+#Question 3: You will be provided with R functions to create BLAST databases and perform blast searches. Use blast to identify what E. coli  gene your sequence matches best. Show a table of the top 3 hits including percent identity, E-value and bit scores. 
+myblastn <- function(myseq,db) {
+  mytmpfile1<-tempfile()
+  mytmpfile2<-tempfile()
+  write.fasta(myseq,names=attr(myseq,"name"),file.out = mytmpfile1)
+  system2(command = "/usr/bin/blastn",
+          args = paste("-db ", db ," -query", mytmpfile1 ,"-outfmt 1 -evalue 0.05 -ungapped >"
+                       , "tmp"))
+ 
+  res <- NULL
+  if (file.info("tmp")$size > 0 ) {
+    res <- readLines("tmp")
+  }
+  
+  res
+}
+
+myblastn_tab <- function(myseq,db) {
+  mytmpfile1<-tempfile()
+  mytmpfile2<-tempfile()
+  write.fasta(myseq,names=attr(myseq,"name"),file.out = mytmpfile1)
+  system2(command = "/usr/bin/blastn",
+          args = paste("-db ", db ," -query", mytmpfile1 ,"-outfmt 6 -evalue 0.05 -ungapped >"
+                       , mytmpfile2))
+ 
+  res <- NULL
+  if (file.info(mytmpfile2)$size > 0 ) {
+    res <- read.csv(mytmpfile2,sep="\t",header=FALSE)
+    colnames(res) <- c("qseqid","sseqid","pident","length","mismatch","gapopen",
+                       "qstart","qend","sstart","send","evalue","bitscore")
+  }
+  unlink(c(mytmpfile1,mytmpfile2))
+  if (!is.null(res)  ) {
+    res <- res[order(-res$bitscore),]
+  }
+  res
+}
+mutator <- function(myseq,nmut) {
+  myseq_mod <- myseq
+  mypos<-sample(seq_along(myseq),nmut)
+  myseq_mod[mypos] <- sample(c("a","c","g","t"),length(mypos),replace = TRUE)
+  return(myseq_mod)
+}
+
+res <- myblastn_tab(myseq = c, db = "Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa")
+head(res)
+str(res)
+
+mysequence <- as.character(res$sseqid[1:1047])
+
+
+View(res)
+res
+#The E.coli gene which matches our sequence the best is "CP4-6 prophage; putative ferric transporter subunit"
+
+#Question 4:You will be provided with a function that enables you to make a set number of point mutations to your sequence of interest. Run the function and write an R code to check the number of mismatches between the original and mutated sequence. 
+C25_mut <-mutator(myseq = c, 100) #C25_mut is the object for the mutated group sequence for 100 mutations.
+
+C25_mut
+
+myblastn_tab(C25_mut,db="Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa")
+res <- myblastn_tab(C25_mut,db="Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa")
+head(res)
+     
+    #Pairwise alignment created
+C25_mut_1 <- DNAString(c2s(C25_mut)) #"C25_mut_1" is the DNA string object of "C25_mut"
+
+c_1 <- DNAString(c2s(c)) #"c_1" is the DNA string object of "c"
+
+aln <- pairwiseAlignment(c_1,C25_mut_1) #aln is the object of the pairwise alignment between "c_1 & C25_mut_1"
+
+  #Calculation of percent sequence identity for "aln"
+pid(aln)
+
+nmismatch(aln) #The number of mismatches found were 57.
+
+
+
+
