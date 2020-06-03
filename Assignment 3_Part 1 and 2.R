@@ -65,3 +65,38 @@ boxplot(ne$Circumf_2004_cm,ne$Circumf_2019_cm,sw$Circumf_2004_cm,sw$Circumf_2019
 
 
 
+
+
+
+#Assignment 3 Part 2
+
+#downloading library
+library("seqinr")
+library("R.utils")
+library("rBLAST")
+library("ape")
+library("ORFik")
+library("Biostrings")
+
+#Question 1: Download the whole set of E. coli gene DNA sequences and use gunzip to decompress. Use themakeblast() function to create a blast database. How many sequences are present in the E.coli set?
+download.file("ftp://ftp.ensemblgenomes.org/pub/bacteria/release-42/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655/cds/Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa.gz", destfile = "Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa.gz")
+
+
+R.utils::gunzip("Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa.gz")
+makeblastdb("Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa",dbtype="nucl","-parse_seqids")
+# 4140 sequences are present in the E.coli set
+
+#Question 2: Download the sample fasta sequences and read them in as above. For your allocated sequence,determine the length (in bp) and the proportion of GC bases.
+download.file("https://raw.githubusercontent.com/markziemann/SLE712_files/master/bioinfo_asst3_part2_files/sample.fa", destfile= "sample.fa")
+s <- read.fasta("sample.fa")
+head(s)
+str(s)
+#Allocated sequence is "25"
+c <- s$`25`
+head(c)
+str(c)
+
+seqinr::getLength(c)
+
+seqinr::GC(c)
+#length for sequence"25" is 1047 and proportion of GC bases is 0.5635148
