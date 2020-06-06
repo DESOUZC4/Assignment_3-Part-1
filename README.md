@@ -4,6 +4,7 @@ Unit name: Bioinformatics and Molecular Biology Techniques
 
 ## Aim of the Assignment
 This assignment consist of two parts:
+
 Part 1: The aim of Part 1 is to import the files from the databases and perform data wrangling, mathematical operations and create a histogram and box plots and saving these into Github.
 
 Part 2: The aim of Part 2 demostrates various functions on how to test the limits of BLAST. The zipped files from the database were downloaded and unzipped. The main aim of this part is to analyze the alloted sequence data and perform manipulations and mutations using the various functions of BLAST and intepret these results accordingly.
