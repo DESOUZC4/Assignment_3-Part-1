@@ -13,7 +13,8 @@ Part 2: The aim of Part 2 demostrates various functions on how to test the limit
 This assignment helped us explore on how R can be used in the field of Biotechnology and the importance of using BLAST and its functions in DNA sequencing.
 
 ## Contents 
-This repository consists of the following files 
+This repository consists of the following files:
+
 a) Assignment 3_Part 1 and 2.R (The R studio file containing the codes based on the questions provided in the Assignment)
 
 b) Histogram final edited A3P1.1.png (The Histogram in its png format for Question 5 of Part 1)
