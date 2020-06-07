@@ -69,8 +69,26 @@ head(sw)
 boxplot(ne$Circumf_2004_cm,ne$Circumf_2019_cm)
 boxplot(ne$Circumf_2004_cm,ne$Circumf_2019_cm,sw$Circumf_2004_cm,sw$Circumf_2019_cm,names= c("ne2004","ne2019","sw2004","sw2019"), ylab="Circumference (cm)", xlab="site and years", main="Growth at plantation site")
 
+# Question 9: Calculate the mean growth over the past 10 years at each site.
 
+# Mean growth over the past 10 years at the "Northeast" site
+ne$Circumf_2019_cm-ne$Circumf_2009_cm
+ne$NEGrowth <- ne$Circumf_2019_cm-ne$Circumf_2009_cm # "ne$NEGrowth" is the object representing the difference in the growth of the past 10 years (2009-2019) for the 'Northeast' site.
+mean(ne$NEGrowth) # mean growth calculation for the object "ne$NEGrowth"
+head(ne$NEGrowth)
+head(ne)
 
+# Mean growth over the past 10 years at the "Southwest" site
+sw$Circumf_2019_cm-sw$Circumf_2009_cm
+sw$SWGrowth <- sw$Circumf_2019_cm-sw$Circumf_2009_cm # "sw$SWGrowth" is the object representing the difference in the growth of the past 10 years (2009-2019) for the 'Southwest' site.
+mean(sw$SWGrowth) # mean growth calculation for the object "sw$SWGrowth"
+head(sw$SWGrowth)
+head(sw)
+
+# Question 10: Use the t.test and wilcox.test functions to estimate the p-value that the 10-year growth is different at the two sites. 
+
+t.test(ne$NEGrowth,sw$SWGrowth)
+wilcox.test(ne$NEGrowth,sw$SWGrowth)
 
 
 
