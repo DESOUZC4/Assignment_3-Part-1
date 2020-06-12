@@ -199,6 +199,17 @@ pid(aln)
 
 nmismatch(aln) #The number of mismatches found were 57.
 
+# Question 5: Using the provided functions for mutating and BLASTing a sequence, determine the number and proportion of sites that need to be altered to prevent the BLAST search from matching the gene of origin. Because the mutation is random, you may need to run this test multiple times to get a reliable answer. 
+groupfunc <- function(myseq,nmut) {
+  mutseq <- mutator( myseq=c, nmut = nmut)
+  res <- myblastn_tab(myseq=mutseq,db= "Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa")
+  if (is.null(res)) {myres= 0} else {myres = 1}
+  return(myres)
+}
+groupfunc(myseq=c, nmut = 100) 
+replicate(n = 100, groupfunc(c,300))
+n <- c(0,100,200,250,300,350)
+
 
 
 
