@@ -206,10 +206,20 @@ groupfunc <- function(myseq,nmut) {
   if (is.null(res)) {myres= 0} else {myres = 1}
   return(myres)
 }
-groupfunc(myseq=c, nmut = 100) 
-replicate(n = 100, groupfunc(c,300))
-n <- c(0,100,200,250,300,350)
+groupfunc(myseq=c, nmut = 1047) 
+replicate(n = 100, groupfunc(c,100))
+mean(replicate(100,groupfunc(myseq,100)))
+n <- c(0,100,200,250,300,350,400)
+groupfunction_rep <- function(nmut) {
+  mean(replicate(100,groupfunc(myseq=c, nmut)))
+  }
+groupfunc(myseq=c, nmut = 1047)
+finalres <- sapply(n,groupfunction_rep)
+finalres
 
+#Question 6. Provide a chart or table that shows how the increasing proportion of mutated bases reduces the ability for BLAST to match the gene origin
 
-
+proportions <- c(1.00, 1.00, 0.89, 0.54, 0.17, 0.08, 0.04) #label of proportions on Xaxis
+nmut_v <- c(0,100,200,250,300,350,400) #labelling y axis with number of mutations
+plot(proportions, nmut_v) #plot for nmut_v vs proportions 
 
