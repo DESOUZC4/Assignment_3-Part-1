@@ -218,7 +218,7 @@ finalres
 
 #Question 6. Provide a chart or table that shows how the increasing proportion of mutated bases reduces the ability for BLAST to match the gene origin
 
-proportions <- c(1.00, 1.00, 0.89, 0.54, 0.17, 0.08, 0.04) #label of proportions on Xaxis
+proportions <- c( 1.00, 1.00, 0.93, 0.48, 0.21, 0.06, 0.02) #label of proportions on Xaxis
 nmut_v <- c(0,100,200,250,300,350,400) #labelling y axis with number of mutations
 plot(proportions, nmut_v) #plot for nmut_v vs proportions 
 
