@@ -205,16 +205,15 @@ groupfunc <- function(myseq,nmut) {
   res <- myblastn_tab(myseq=mutseq,db= "Escherichia_coli_str_k_12_substr_mg1655.ASM584v2.cds.all.fa")
   if (is.null(res)) {myres= 0} else {myres = 1}
   return(myres)
-}
-groupfunc(myseq=c, nmut = 1047) 
-replicate(n = 100, groupfunc(c,100))
-mean(replicate(100,groupfunc(myseq,100)))
-n <- c(0,100,200,250,300,350,400)
+}  # "groupfunc" is the object created conatining the commands for randomisation of our sequence to be mutated, blast with the blast_tab function and summary of the results as '0' or '1'.
+groupfunc(myseq=c, nmut = 1047) # The function was run again for testing.
+replicate(n = 100, groupfunc(c,100)) #To get accurate and reproducible results, the replicate function was used.
+mean(replicate(100,groupfunc(myseq,100))) # The mean function was used to summarise the results as '0' or '1'.
+n <- c(0,100,200,250,300,350,400) # The object 'n' was created consisting the number nmut values.
 groupfunction_rep <- function(nmut) {
   mean(replicate(100,groupfunc(myseq=c, nmut)))
-  }
-groupfunc(myseq=c, nmut = 1047)
-finalres <- sapply(n,groupfunction_rep)
+  } ## The object 'groupfunction_rep' was created consisting the number of replications for all the 'n' values. nmut = 1047)
+finalres <- sapply(n,groupfunction_rep) # This 'finalres' function was run to view the final results.
 finalres
 
 #Question 6. Provide a chart or table that shows how the increasing proportion of mutated bases reduces the ability for BLAST to match the gene origin
