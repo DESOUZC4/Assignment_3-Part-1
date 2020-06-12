@@ -197,7 +197,7 @@ aln <- pairwiseAlignment(c_1,C25_mut_1) #aln is the object of the pairwise align
   #Calculation of percent sequence identity for "aln"
 pid(aln)
 
-nmismatch(aln) #The number of mismatches found were 57.
+nmismatch(aln) #The number of mismatches found were 72.
 
 # Question 5: Using the provided functions for mutating and BLASTing a sequence, determine the number and proportion of sites that need to be altered to prevent the BLAST search from matching the gene of origin. Because the mutation is random, you may need to run this test multiple times to get a reliable answer. 
 groupfunc <- function(myseq,nmut) {
