@@ -33,7 +33,7 @@ Part 2: A zipped file consisting an whole set of E.coli gene has been provided. 
 The R code was tested on R studio version 1.2.1335 and R version 3.6.3 (2020-02-29)
 
 ## Credits 
-Candice Desouza (220146994) and Shweta Jadhav
+Candice Desouza (220146994) and Shweta Jadhav (218666553)
 
 ## License
 This License refers to version 3 of the "GNU General Public License".
